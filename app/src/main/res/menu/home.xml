@@ -2,8 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_visualizacion"
+        app:showAsAction="always"
+        android:title="Vista"
+        android:icon="@drawable/view_list"
+        />
+    <item
+        android:id="@+id/action_exit"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="Exit"
         app:showAsAction="never" />
 </menu>
