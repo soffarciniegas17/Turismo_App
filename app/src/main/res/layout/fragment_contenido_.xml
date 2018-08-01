@@ -18,7 +18,7 @@
         android:text="TITULO" />
 
     <ImageView
-        android:id="@+id/imagenView"
+        android:id="@+id/imagenViewRR"
         android:background="@color/colorAccent"
         android:layout_marginTop="90dp"
         android:layout_marginLeft="120dp"

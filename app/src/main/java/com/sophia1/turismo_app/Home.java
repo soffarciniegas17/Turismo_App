@@ -155,6 +155,12 @@ public class Home extends AppCompatActivity
     }
 
     public void abreInicio(){
+        FragmentManager manager=getFragmentManager();
+        FragmentTransaction transaction=manager.beginTransaction();
+
+        Fragment fragInicio=new Inicio_Frag();
+        transaction.replace(R.id.contenedor_fragment_1,fragInicio);
+        transaction.commit();
 
         Toast.makeText(this,"inicio",Toast.LENGTH_LONG).show();
 
@@ -199,6 +205,16 @@ public class Home extends AppCompatActivity
 
     @Override
     public void itemPresionado(int item) {
+        FragmentManager manager=getFragmentManager();
+        FragmentTransaction transaction=manager.beginTransaction();
+
+        Fragment fragContenido=new Contenido_Frag();
+        Bundle datos=new Bundle();
+        datos.putInt("CATEG",categoria);
+        datos.putInt("ITEM",itemPress);
+        fragContenido.setArguments(datos);
+        transaction.replace(R.id.contenedor_fragment_1,fragContenido);
+        transaction.commit();
 
         Toast.makeText(this,"contenido_lugar",Toast.LENGTH_LONG).show();
 

@@ -5,7 +5,7 @@ package com.sophia1.turismo_app;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +33,11 @@ public class Contenido_Frag extends Fragment {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_contenido_, container, false);
 
-        imagen= view.findViewById(R.id.imageView);
+        imagen= view.findViewById(R.id.imagenViewRR);
         titulo= view.findViewById(R.id.titulo);
         descripcion= view.findViewById(R.id.descrip);
 
-        item=-1;
+        item=0;
         categoria=0;
         if(getArguments()!= null){
             item=getArguments().getInt("ITEM");
@@ -68,7 +68,7 @@ public class Contenido_Frag extends Fragment {
                 //imageRes, String titulo, String descripcionCorta, String descripcionLarga, double latitud, double longitud, String categoria
                 lista.add(new ItemLugar(cursor.getInt(0), cursor.getString(1),cursor.getString(2),
                         cursor.getString(3),cursor.getDouble(4), cursor.getDouble(5),
-                        cursor.getString(6)));
+                        "1"));
 
             }while (cursor.moveToNext());
         }
@@ -82,7 +82,7 @@ public class Contenido_Frag extends Fragment {
                 lista.add(new ItemLugar(cursor.getInt(0),
                         cursor.getString(1),cursor.getString(2),
                         cursor.getString(3),cursor.getDouble(4),
-                        cursor.getDouble(5), cursor.getString(6)));
+                        cursor.getDouble(5), "1"));
 
             }while (cursor.moveToNext());
         }
