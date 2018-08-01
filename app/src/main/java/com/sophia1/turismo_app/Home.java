@@ -1,5 +1,8 @@
 package com.sophia1.turismo_app;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -15,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ComunicaFragment {
@@ -23,12 +27,13 @@ public class Home extends AppCompatActivity
     private boolean visualizacion;
     private FloatingActionButton fab;
     private MenuItem actionVisualizacion;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
          fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -60,8 +65,9 @@ public class Home extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
+        getMenuInflater().inflate(R.menu.home, menu);
         actionVisualizacion=menu.findItem(R.id.action_visualizacion);
+
         if (visualizacion){
             actionVisualizacion.setIcon(R.drawable.view_list);
         }else{
@@ -69,11 +75,7 @@ public class Home extends AppCompatActivity
 
         }
 
-        //verificar la orientacion para poner invisible el icono
-        int orientation=this.getResources().getConfiguration().orientation;
-        if(orientation!= Configuration.ORIENTATION_PORTRAIT){
-            actionVisualizacion.setVisible(false);
-        }
+
         //se inicia los fragment desde el metodo del menu para evitar errores del actionVisualizacion null
         if(fragmentActivo==1){
             abreInicio();
@@ -83,7 +85,8 @@ public class Home extends AppCompatActivity
             itemPresionado(itemPress);
         }
 
-        getMenuInflater().inflate(R.menu.home, menu);
+
+
         return true;
     }
 
@@ -99,6 +102,7 @@ public class Home extends AppCompatActivity
 
         if (id == R.id.action_exit) {
 
+            finish();
 
             return true;
         }else if(id==R.id.action_visualizacion){
@@ -113,6 +117,8 @@ public class Home extends AppCompatActivity
                 abreLista();
 
             }
+
+
 
 
             return true;
@@ -150,32 +156,58 @@ public class Home extends AppCompatActivity
 
     public void abreInicio(){
 
+        Toast.makeText(this,"inicio",Toast.LENGTH_LONG).show();
+
         fragmentActivo=1;
         actionVisualizacion.setVisible(false);
+        fab.setVisibility(View.INVISIBLE);
+        toolbar.setTitle("Inicio");
 
     }
     public void abreLista(){
+        FragmentManager manager=getFragmentManager();
+        FragmentTransaction transaction=manager.beginTransaction();
+
+        Fragment fragLista=new FragmentLista();
+        Bundle datos=new Bundle();
+        datos.putInt("CATEG",categoria);
+        datos.putBoolean("VIS",visualizacion);
+        fragLista.setArguments(datos);
+
+        transaction.replace(R.id.contenedor_fragment_1,fragLista);
+        transaction.commit();
+
+        Toast.makeText(this,"lista",Toast.LENGTH_LONG).show();
 
 
 
 
         fragmentActivo=2;
         actionVisualizacion.setVisible(true);
-        if (categoria==0)actionVisualizacion.setIcon(R.drawable.icon_places);
-        else if (categoria==1)actionVisualizacion.setIcon(R.drawable.icon_hotel);
-        else if (categoria==2)actionVisualizacion.setIcon(R.drawable.icon_restaurant);
+        if (categoria==0)fab.setImageResource(R.drawable.icon_places);
+        else if (categoria==1)fab.setImageResource(R.drawable.icon_hotel);
+        else if (categoria==2)fab.setImageResource(R.drawable.icon_restaurant);
+
+        int orientation=this.getResources().getConfiguration().orientation;
+        if(orientation==Configuration.ORIENTATION_LANDSCAPE)actionVisualizacion.setVisible(false);
+        else fab.setVisibility(View.VISIBLE);
+
+        toolbar.setTitle("Sitios");
+
     }
 
 
     @Override
     public void itemPresionado(int item) {
 
-
+        Toast.makeText(this,"contenido_lugar",Toast.LENGTH_LONG).show();
 
         itemPress=item;
         fragmentActivo=3;
-        actionVisualizacion.setVisible(true);
-        actionVisualizacion.setIcon(R.drawable.icon_car);
+        actionVisualizacion.setVisible(false);
+        fab.setImageResource(R.drawable.icon_car);
+        fab.setVisibility(View.VISIBLE);
+        toolbar.setTitle("Detalle Sitio");
 
     }
     public void onResume(){
@@ -199,6 +231,9 @@ public class Home extends AppCompatActivity
             }
         });
 
+        guardaDatos=datos.getInt("nada",0);
+        if(guardaDatos==0)guardaDatos();
+
 
 
     }
@@ -212,8 +247,27 @@ public class Home extends AppCompatActivity
         guarda.putInt("FRAGMENT_ACTIVO",fragmentActivo);
         guarda.putInt("CATEGORIA",categoria);
         guarda.putInt("ITEM_PRESIONADO",itemPress);
+        guarda.putInt("nada",guardaDatos);
 
 
         guarda.apply();
+    }
+    int guardaDatos;
+    public void guardaDatos(){
+        DataBase dataBase=new DataBase(this);
+
+        for (int i=0;i<10;i++){
+            dataBase.guardar(R.drawable.icono,"DEFECTO0","alexander casanova",".",2.2,2.2,
+                    0);
+        }
+        for (int i=0;i<10;i++){
+            dataBase.guardar(R.drawable.icono,"DEFECTO11","alexander casanova",".",2.2,2.2,
+                    1);
+        }
+        for (int i=0;i<10;i++){
+            dataBase.guardar(R.drawable.icono,"DEFECTO22","alexander casanova",".",2.2,2.2,
+                    2);
+        }
+        guardaDatos=1;
     }
 }

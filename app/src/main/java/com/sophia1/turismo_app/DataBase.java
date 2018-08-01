@@ -42,7 +42,7 @@ public class DataBase extends SQLiteOpenHelper {
         values.put("IMAGEN", imagen);
         values.put("TITULO", titulo);
         values.put("DESCRIPCIONCORTA", descripcioncorta);
-        values.put("DESCRPCION", descripcion);
+        values.put("DESCRIPCION", descripcion);
         values.put("LATITUD", latitud);
         values.put("LONGITUD", longitud);
         values.put("CATEGORIA", categoria);
@@ -56,7 +56,7 @@ public class DataBase extends SQLiteOpenHelper {
         Cursor cursor;
 
         try {
-            String find[] = {"IMAGEN", "TITULO", "DESCRPCIONCORTA", "DESCRIPCION", "LATITUD", "LONGITUD"};
+            String find[] = {"IMAGEN", "TITULO", "DESCRIPCIONCORTA", "DESCRIPCION", "LATITUD", "LONGITUD"};
 
             cursor= db.query("LUGARES", find, null, null, null, null, null, null);
             return cursor;
@@ -70,7 +70,7 @@ public class DataBase extends SQLiteOpenHelper {
         Cursor cursor;
 
         try {
-            String find[] = {"IMAGEN", "TITULO", "DESCRPCIONCORTA", "DESCRIPCION", "LATITUD", "LONGITUD"};
+            String find[] = {"IMAGEN", "TITULO", "DESCRIPCIONCORTA", "DESCRIPCION", "LATITUD", "LONGITUD"};
             String busca = "CATEGORIA" + " = ? ";
             String codigo [] = {categoria};
             cursor= db.query("LUGARES", find, busca, codigo, null, null, null, null);

@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Titulo"
-            android:textSize="28dp"
+            android:textSize="20dp"
             android:id="@+id/item_lugar_titulo"
             />
         <TextView
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Titulo"
-            android:textSize="15dp"
+            android:textSize="12dp"
             android:id="@+id/item_lugar_ubicacion"
             />
     </LinearLayout>
