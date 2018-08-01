@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardElevation="7dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardCornerRadius="12dp"
+    >
+
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="150dp">
+
+    <ImageView
+        android:id="@+id/item_lugar_imagen"
+        android:layout_width="150dp"
+        android:background="@mipmap/ic_launcher"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="18dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Titulo"
+            android:textSize="28dp"
+            android:id="@+id/item_lugar_titulo"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Titulo"
+            android:textSize="10dp"
+            android:id="@+id/item_lugar_descripcionC"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Titulo"
+            android:textSize="15dp"
+            android:id="@+id/item_lugar_ubicacion"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>
+</android.support.v7.widget.CardView>
