@@ -2,6 +2,7 @@ package com.sophia1.turismo_app;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -54,11 +55,29 @@ public class DataBase extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor;
 
-        String find[] = {"IMAGEN", "TITULO", "DESCRPCIONCORTA", "DESCRIPCION", "LATITUD", "LONGITUD"};
+        try {
+            String find[] = {"IMAGEN", "TITULO", "DESCRPCIONCORTA", "DESCRIPCION", "LATITUD", "LONGITUD"};
+
+            cursor= db.query("LUGARES", find, null, null, null, null, null, null);
+            return cursor;
+        } catch (Exception e){}
+
+        return null;
+    }
+
+    public Cursor cargarCategoria (String categoria){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor;
 
         try {
+            String find[] = {"IMAGEN", "TITULO", "DESCRPCIONCORTA", "DESCRIPCION", "LATITUD", "LONGITUD"};
+            String busca = "CATEGORIA" + " = ? ";
+            String codigo [] = {categoria};
+            cursor= db.query("LUGARES", find, busca, codigo, null, null, null, null);
+            return cursor;
+        } catch (Exception e){}
 
-        }
+        return null;
     }
 
 }
